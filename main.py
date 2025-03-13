@@ -6,6 +6,7 @@ Created on Tue Mar 11 06:08:45 2025
 """
 
 import streamlit as st
+
 preguntas_respuestas_formato_lista = {
     "¿Qué autoridad municipal en Achí, Bolívar, evalúa los documentos para otorgar la exención del impuesto Predial Unificado?": {
         "respuestas": ["a) La Alcaldía Municipal", "b) El Concejo Municipal", "c) La Tesorería Municipal", "d) La Secretaría de Hacienda"],
@@ -73,4 +74,25 @@ preguntas_respuestas_formato_lista = {
     }
 }
 
+correctas=0
+totales=0
 
+
+for pregunta in preguntas_respuestas_formato_lista.keys():
+    
+    
+    answer = st.radio(
+        pregunta,preguntas_respuestas_formato_lista[pregunta]["respuestas"]
+        ,
+
+    )
+    
+    if answer == preguntas_respuestas_formato_lista[pregunta]["correcta"]:
+
+        correctas+=1
+
+    totales+=1
+    
+if st.button("finalizar", type="primary"):
+    with st.chat_message("user"):
+        st.write("tu resultado es:",str(100*correctas/totales))
